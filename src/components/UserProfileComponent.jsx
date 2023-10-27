@@ -10,9 +10,14 @@ export function UserProfileComponent({ user }) {
     };
 
     return (
-        <div>
-            <p>Welcome {user.email}</p>
-            <button onClick={handleLogout}>Logout</button>
+        <div className="flex flex-col items-center space-y-4">
+            <p className="text-xl font-bold">Welcome {user.email}</p>
+            <button 
+                onClick={handleLogout} 
+                className="bg-green-600 text-white p-2 rounded-md hover:bg-red-500 transition-colors duration-200"
+            >
+                Logout
+            </button>
         </div>
     );
 }
