@@ -1,68 +1,36 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { loginUser, registerUser, resetPassword, logoutUser } from './slices/authSlice'; // Adjust the path as needed
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './App.css';
+import { LoginComponent } from './components/LoginComponent';
+import { RegisterComponent } from './components/RegisterComponent';
+import { ForgotPasswordComponent } from './components/ForgotPasswordComponent';
+import { UserProfileComponent } from './components/UserProfileComponent';
+
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [mode, setMode] = useState('login'); // 'login', 'register', 'forgotPassword'
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [mode, setMode] = useState('login'); // 'login', 'register', 'forgotPassword'
 
-  const dispatch = useDispatch();
-  const authState = useSelector(state => state.auth);
+    const authState = useSelector(state => state.auth);
 
-  const handleLogin = () => {
-      dispatch(loginUser({ email, password }));
-  };
+    const renderModeComponent = () => {
+        switch (mode) {
+            case 'login':
+                return <LoginComponent setEmail={setEmail} setPassword={setPassword} email={email} password={password} />;
+            case 'register':
+                return <RegisterComponent setEmail={setEmail} setPassword={setPassword} email={email} password={password} />;
+            case 'forgotPassword':
+                return <ForgotPasswordComponent setEmail={setEmail} email={email} />;
+            default:
+                return null;
+        }
+    };
 
-  const handleRegister = () => {
-      dispatch(registerUser({ email, password }));
-  };
-
-  const handlePasswordReset = () => {
-      dispatch(resetPassword(email));
-  };
-
-  const handleLogout = () => {
-      dispatch(logoutUser());
-  };
-
-  return (
-      <div className="container">
-          {authState.user ? (
-              <>
-                  <p>Welcome, {authState.user.email}</p>
-                  <button onClick={handleLogout}>Logout</button>
-              </>
-          ) : (
-              <>
-                  {mode === 'login' && (
-                      <div>
-                          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-                          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-                          <button onClick={handleLogin}>Login</button>
-                          <button onClick={() => setMode('register')}>Register</button>
-                          <button onClick={() => setMode('forgotPassword')}>Forgot Password?</button>
-                      </div>
-                  )}
-                  {mode === 'register' && (
-                      <div>
-                          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-                          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-                          <button onClick={handleRegister}>Sign Up</button>
-                          <button onClick={() => setMode('login')}>Already have an account? Login</button>
-                      </div>
-                  )}
-                  {mode === 'forgotPassword' && (
-                      <div>
-                          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-                          <button onClick={handlePasswordReset}>Reset Password</button>
-                          <button onClick={() => setMode('login')}>Back to Login</button>
-                      </div>
-                  )}
-              </>
-          )}
-      </div>
-  );
+    return (
+        <div className="container">
+            {authState.user ? <UserProfileComponent user={authState.user} /> : renderModeComponent()}
+        </div>
+    );
 }
 
 export default App;
