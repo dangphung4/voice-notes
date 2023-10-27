@@ -41,7 +41,7 @@ export function LoginComponent({ setEmail, setPassword, email, password }) {
     className="flex-1 p-2 bg-gray-600 text-white rounded-md hover:bg-gray-500 active:bg-gray-700 focus:outline-none focus:border-gray-700 focus:ring focus:ring-gray-200" 
     onClick={handleAnonymousLogin}
 >
-    Login Anonymously
+    Guest
 </button>
 
 
