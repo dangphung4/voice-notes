@@ -65,7 +65,7 @@ function App() {
     const location = useLocation();
 
     return (
-      <div className={`min-h-screen bg-gray-100 ${location.pathname === "/transcribe" ? '' : 'flex items-center justify-center'}`}>
+<div className={`min-h-screen bg-gray-300 ${location.pathname === "/transcribe" ? '' : 'flex items-center justify-center'}`}>
         <div className={`${location.pathname === "/transcribe" ? '' : 'bg-white p-8 rounded-lg shadow-md w-96'}`}>
           {renderRoutes()}
           {mode === "login" && location.pathname !== "/transcribe" && (

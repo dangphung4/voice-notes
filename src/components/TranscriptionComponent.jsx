@@ -58,7 +58,7 @@ export function TranscriptionComponent({ uid }) {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-200 p-10 flex flex-col">
+<div className="w-full min-h-screen bg-gray-500 p-10 flex flex-col">
         {isLoading && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-lg shadow-md">
@@ -67,10 +67,17 @@ export function TranscriptionComponent({ uid }) {
         </div>
       )}
     <UserProfileComponent user={{ email: email }} />
-    <input type="file" onChange={onFileChange} accept="video/mp4" className="mt-4" />
-    <button onClick={onTranscribeClick} className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-500 transition-colors duration-200 w-full mt-4">
+    <div className="flex justify-center space-x-4 mt-3">
+    <label className="flex items-center justify-center bg-indigo-600 text-white p-1 rounded-md hover:bg-indigo-700 hover:text-white transition-colors duration-350 w-1/4">
+    Choose File
+    <input type="file" onChange={onFileChange} accept="video/mp4" className="hidden" />
+</label>
+
+    <button onClick={onTranscribeClick} className=" bg-green-600 text-white p-1 rounded-md hover:bg-green-700 hover:text-white transition-colors duration-350 w-1/4">
         Transcribe
     </button>
+</div>
+
 
     <div className="bg-white mt-4 flex flex-col flex-grow rounded-lg p-4">
         {transcription && (
@@ -82,22 +89,22 @@ export function TranscriptionComponent({ uid }) {
                     placeholder="Your transcription will appear here..."
                 ></textarea>
 
-                <div className="mt-4 flex space-x-4">
-                    {transcribeClicked && (
-                        <>
-                            <button 
-                                onClick={onSummarizeClick} 
-                                className="bg-green-600 text-white p-2 rounded-md hover:bg-green-500 transition-colors duration-200 flex-grow">
-                                Summarize
-                            </button>
-                            <button 
-                                onClick={onElaborateClick} 
-                                className="bg-yellow-600 text-white p-2 rounded-md hover:bg-yellow-500 transition-colors duration-200 flex-grow">
-                                Elaborate
-                            </button>
-                        </>
-                    )}
-                </div>
+<div className="mt-4 flex space-x-4">
+    {transcribeClicked && (
+        <>
+            <button 
+                onClick={onSummarizeClick} 
+                className="bg-black text-white p-1 rounded-md hover:bg-gray-300 hover:text-black transition-colors duration-350 flex-grow">
+                Summarize
+            </button>
+            <button 
+                onClick={onElaborateClick} 
+                className="bg-black text-white p-1 rounded-md hover:bg-gray-300 hover:text-black transition-colors duration-350 flex-grow">
+                Elaborate
+            </button>
+        </>
+    )}
+</div>
             </>
         )}
     </div>
