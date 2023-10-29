@@ -1,16 +1,24 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser, loginAnonymously } from '../slices/authSlice'; 
+import { useNavigate } from 'react-router-dom';  // <-- Corrected this import
+
 
 export function LoginComponent({ setEmail, setPassword, email, password }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();  // <-- Corrected this line
+
 
     const handleLogin = () => {
         dispatch(loginUser({ email, password }));
+        navigate("/transcribe");  
+
     };
 
     const handleAnonymousLogin = () => {
         dispatch(loginAnonymously());
+        navigate("/transcribe");  
+
     };
 
     return (

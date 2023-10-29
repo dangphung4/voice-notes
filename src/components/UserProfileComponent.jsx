@@ -1,14 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from './slices/authSlice';
-import { selectTheme } from './slices/themeSlice'; 
+import { logoutUser } from '../slices/authSlice';
+import { selectTheme } from '../slices/themeSlice'; 
+import { useNavigate } from 'react-router-dom';  // <-- Import this
+
 
 export function UserProfileComponent({ user }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate(); 
     const theme = useSelector(selectTheme);  // Get the current theme
 
     const handleLogout = () => {
-        dispatch(logoutUser());
+        dispatch(logoutUser()).then(() => {
+            navigate('/login');
+        });
     };
 
     const themeStyles = theme === 'dark' ? {
