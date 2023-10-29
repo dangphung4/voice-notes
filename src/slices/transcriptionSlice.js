@@ -53,6 +53,7 @@ export const elaborateTranscription = createAsyncThunk(
         });
         
         const data = await response.json();
+        console.log(data);
         return data.elaboration;
     }
 );
