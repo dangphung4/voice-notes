@@ -23,6 +23,39 @@ export const transcribeAudio = createAsyncThunk(
     }
 );
 
+export const summarizeTranscription = createAsyncThunk(
+    'transcription/summarize',
+    async ({ transcription, uid }) => {
+        const response = await fetch('http://localhost:1231/chatgpt/summarize/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'id': uid
+            },
+            body: JSON.stringify({ text: transcription })
+        });
+        
+        const data = await response.json();
+        return data.summary;
+    }
+);
+
+export const elaborateTranscription = createAsyncThunk(
+    'transcription/elaborate',
+    async ({ transcription, uid }) => {
+        const response = await fetch('http://localhost:1231/chatgpt/elaborate/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'id': uid
+            },
+            body: JSON.stringify({ text: transcription })
+        });
+        
+        const data = await response.json();
+        return data.elaboration;
+    }
+);
 
 const transcriptionSlice = createSlice({
     name: 'transcription',
@@ -44,6 +77,14 @@ const transcriptionSlice = createSlice({
             .addCase(transcribeAudio.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
+            })
+            .addCase(summarizeTranscription.fulfilled, (state, action) => {
+                state.transcription = action.payload;
+                state.error = null;
+            })
+            .addCase(elaborateTranscription.fulfilled, (state, action) => {
+                state.transcription = action.payload;
+                state.error = null;
             });
         }
     });
