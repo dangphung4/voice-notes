@@ -1,0 +1,41 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.file-badge {
+    background-color: #e2e8f0; /* light gray background */
+    border-radius: 12px; /* rounded edges */
+    padding: 0.25rem 0.5rem; /* space around text */
+    font-size: 0.875rem; /* font size */
+    margin-left: 8px; /* space between the button and badge */
+}
+
+/* Enhanced styling for the transcription textarea */
+textarea {
+    line-height: 1.5;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  /* Gradient button styling */
+  button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background: linear-gradient(45deg, #764ba2, #667eea);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* File badge styling */
+  .file-badge {
+    background-color: #f5f7fa;
+    padding: 4px 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
