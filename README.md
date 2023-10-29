@@ -1,5 +1,3 @@
-Absolutely! Let's craft a detailed README for "Transcriptify". 
-
 ---
 
 # Transcriptify
