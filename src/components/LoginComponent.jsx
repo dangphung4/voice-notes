@@ -1,32 +1,29 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser, loginAnonymously, registerUser } from '../slices/authSlice'; 
-import { useNavigate } from 'react-router-dom';  // <-- Corrected this import
-
+import { useNavigate } from 'react-router-dom';
 
 export function LoginComponent({ setEmail, setPassword, email, password }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();  // <-- Corrected this line
-
+    const navigate = useNavigate();
 
     const handleLogin = () => {
         dispatch(loginUser({ email, password }));
         navigate("/transcribe");  
-
     };
 
     const handleAnonymousLogin = () => {
         dispatch(loginAnonymously());
         navigate("/transcribe");  
-
     };
+
     const handleRegister = () => {
         dispatch(registerUser({ email, password }));
-      
     };
 
     return (
         <div className="space-y-6">
+            <h1 className="text-2xl font-bold text-center mb-4">Welcome to Transcriptify!</h1>
             <input 
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" 
                 type="email" 

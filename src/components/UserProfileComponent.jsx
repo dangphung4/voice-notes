@@ -29,7 +29,7 @@ export function UserProfileComponent({ user }) {
             <p className="text-xl font-bold">Welcome {user.email}</p>
             <button 
                 onClick={handleLogout} 
-                className="bg-green-600 text-white p-2 rounded-md hover:bg-red-500 transition-colors duration-200"
+                className="bg-black text-white p-2 rounded-md hover:bg-gray-300 hover:text-black transition-colors duration-200"
             >
                 Logout
             </button>
