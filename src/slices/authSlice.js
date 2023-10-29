@@ -11,6 +11,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) 
     const { email, password } = credentials;
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const { user } = userCredential;
+    console.log(user);
     // Extracting only the serializable data
     return {
         uid: user.uid,
