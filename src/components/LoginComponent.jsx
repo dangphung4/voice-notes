@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser, loginAnonymously } from '../slices/authSlice'; 
+import { loginUser, loginAnonymously, registerUser } from '../slices/authSlice'; 
 import { useNavigate } from 'react-router-dom';  // <-- Corrected this import
 
 
@@ -20,6 +20,10 @@ export function LoginComponent({ setEmail, setPassword, email, password }) {
         navigate("/transcribe");  
 
     };
+    const handleRegister = () => {
+        dispatch(registerUser({ email, password }));
+      
+    };
 
     return (
         <div className="space-y-6">
@@ -38,21 +42,24 @@ export function LoginComponent({ setEmail, setPassword, email, password }) {
                 placeholder="Password" 
             />
             <div className="flex h-10 space-x-3">
-                
-            <button 
-    className="flex-1 p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 active:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:ring focus:ring-indigo-200" 
-    onClick={handleLogin}
->
-    Login
-</button>
-<button 
-    className="flex-1 p-2 bg-gray-600 text-white rounded-md hover:bg-gray-500 active:bg-gray-700 focus:outline-none focus:border-gray-700 focus:ring focus:ring-gray-200" 
-    onClick={handleAnonymousLogin}
->
-    Guest
-</button>
-
-
+                <button 
+                    className="flex-1 p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 active:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:ring focus:ring-indigo-200" 
+                    onClick={handleLogin}
+                >
+                    Login
+                </button>
+                <button 
+                    className="flex-1 p-2 bg-gray-600 text-white rounded-md hover:bg-gray-500 active:bg-gray-700 focus:outline-none focus:border-gray-700 focus:ring focus:ring-gray-200" 
+                    onClick={handleAnonymousLogin}
+                >
+                    Guest
+                </button>
+                <button 
+                    className="flex-1 p-2 bg-green-600 text-white rounded-md hover:bg-green-500 active:bg-green-700 focus:outline-none focus:border-green-700 focus:ring focus:ring-green-200" 
+                    onClick={handleRegister}
+                >
+                    Sign Up
+                </button>
             </div>
         </div>
     );
