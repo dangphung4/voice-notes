@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme, selectTheme } from './slices/themeSlice'; 
 import "./App.css";
 import { LoginComponent } from "./components/LoginComponent";
 import { RegisterComponent } from "./components/RegisterComponent";
@@ -41,7 +42,19 @@ function App() {
     }
   };
 
+  const theme = useSelector(selectTheme);
+  const dispatch = useDispatch();
+
+  if (theme === 'light') {
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+  } else {
+    document.body.classList.remove('light-mode');
+    document.body.classList.add('dark-mode');
+  }
+
   return (
+    <div className={`flex flex-col items-center space-y-4 user-profile ${themeClass}`}>
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <div className="container">
@@ -89,6 +102,13 @@ function App() {
           )}
         </div>
       </div>
+      <button
+        onClick={() => dispatch(toggleTheme())}
+        className="mt-4 bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-400 transition-colors duration-200"
+      >
+        Toggle Theme
+      </button>
+    </div>
     </div>
   );
 }
